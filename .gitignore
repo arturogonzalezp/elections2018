@@ -104,3 +104,4 @@ ENV/
 .DS_Store
 .vscode/
 .env
+playground.py

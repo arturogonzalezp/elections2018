@@ -9,18 +9,24 @@ Analyzer of tweets for the Mexican elections of 2018
 - José Alejandro Vázquez Sánchez
 - Michelle Sagnelli D'urzo
 
-## Install project
+## Getting Started
 
-The variables with **$** you need to change them for the API values
+The variables with **$** you need to change them for the API values in the .env file
+```
+export CONSUMER_KEY=$consumer_key
 
-```bash
-sudo -H bash install.sh
+export CONSUMER_SECRET=$consumer_secret
 
-export CONSUMER_KEY="$consumer_key"
+export ACCESS_TOKEN=$access_token
 
-export CONSUMER_SECRET="$consumer_secret"
+export ACCESS_TOKEN_SECRET=$access_token_secret
+```
 
-export ACCESS_TOKEN="$access_token"
-
-export ACCESS_TOKEN_SECRET="$access_token_secret"
+### Make Commands
+```
+make install
+make setup
+make run
+make playground
+make test
 ```
