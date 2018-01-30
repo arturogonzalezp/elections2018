@@ -1,11 +1,12 @@
 import tweepy
-from ..storage.insert_tweet import insert
+from ..storage.manager import Manager
 
 class TweetsStreamer(tweepy.StreamListener):
     buffer = []
     def on_connect(self):
         """Called once connected to streaming server"""
         print ('On Connect')
+        self.manager = Manager()
     def keep_alive(self):
         """Called when a keep-alive arrived"""
         print ('Keep Alive')
@@ -13,8 +14,8 @@ class TweetsStreamer(tweepy.StreamListener):
         """Called when a new status arrives"""
         print (status.text)
         self.buffer.append(status)
-        if(self.buffer.__len__() == 10):
-            insert(self.buffer)
+        if(self.buffer.__len__() == Manager.buffer_size):
+            self.manager.insert_tweet(self.buffer)
             self.buffer = []
     def on_exception(self, exception):
         """Called when an unhandled exception occurs."""
