@@ -1,16 +1,18 @@
 import tweepy
+from elections.storage.manager import Manager
+
 class TweetsStreamer(tweepy.StreamListener):
-    buffer = []
     def on_connect(self):
         """Called once connected to streaming server"""
         print ('On Connect')
+        self.manager = Manager(10)
     def keep_alive(self):
         """Called when a keep-alive arrived"""
         print ('Keep Alive')
     def on_status(self, status):
         """Called when a new status arrives"""
-        print (status.text)
-        self.buffer.append(status)
+        print ("Tweet by: @" + status.user.screen_name)
+        self.manager.insert_tweet(status)
     def on_exception(self, exception):
         """Called when an unhandled exception occurs."""
         print ('On Exception')
