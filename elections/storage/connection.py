@@ -2,6 +2,7 @@ import pymysql
 import os
 
 class Connection:
+    mode = os.environ.get('ENVIRONMENT')
     def __init__(self):
         self.connection = pymysql.connect(host=os.environ.get('DB_HOST'),
                                           port=int(os.environ.get('DB_PORT')),
