@@ -9,9 +9,11 @@ class Manager:
     def insert_tweet(self,tweet):
         self.buffer.append(tweet)
         if(self.buffer.__len__() == self.buffer_size):
-            self.save()
+            if(Connection.mode == 'PROD'):
+                self.save()
+            elif(Connection.mode == 'DEV'):
+                print('Dev mode, not saved')
             self.buffer = []
-
     def save(self):
         db = Connection()
         for tweet in self.buffer:
