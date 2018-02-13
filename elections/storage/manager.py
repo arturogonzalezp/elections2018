@@ -12,6 +12,7 @@ class Manager:
             if(Connection.mode == 'PROD'):
                 self.save()
             elif(Connection.mode == 'DEV'):
+                # Modify here poncho!
                 print('Dev mode, not saved')
             self.buffer = []
     def save(self):
