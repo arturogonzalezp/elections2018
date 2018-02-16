@@ -1,7 +1,7 @@
 import os
 
 ROOT = lambda base : os.path.join(os.path.dirname(__file__), base).replace('\\','/')
-FILE_NAME = "users.txt"
+FILE_NAME = 'users.txt'
 
 class Accounts:
 
@@ -10,7 +10,7 @@ class Accounts:
         try:
             user_file = open(ROOT(FILE_NAME), "r")
         except IOError:
-            print "Cannot open " + FILE_NAME
+            print ("Cannot open " + FILE_NAME)
         else:
             for i, line in enumerate(user_file):
                 self.accounts.insert(i, line)
