@@ -1,11 +1,12 @@
 import tweepy
 from elections.storage.manager import Manager
+BUFFER_SIZE = 40
 
 class TweetsStreamer(tweepy.StreamListener):
     def on_connect(self):
         """Called once connected to streaming server"""
         print ('On Connect')
-        self.manager = Manager(10)
+        self.manager = Manager(BUFFER_SIZE)
     def keep_alive(self):
         """Called when a keep-alive arrived"""
         print ('Keep Alive')
