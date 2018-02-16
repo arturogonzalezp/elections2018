@@ -106,3 +106,4 @@ ENV/
 .env
 playground.py
 .vs/
+local_storage.json
