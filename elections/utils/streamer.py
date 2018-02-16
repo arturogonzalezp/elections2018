@@ -1,6 +1,6 @@
 import tweepy
 from elections.storage.manager import Manager
-BUFFER_SIZE = 40
+BUFFER_SIZE = 5
 
 class TweetsStreamer(tweepy.StreamListener):
     def on_connect(self):
