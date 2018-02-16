@@ -1,5 +1,4 @@
 import json
-import re
 from elections.storage.connection import Connection
 
 class Manager:
@@ -17,7 +16,7 @@ class Manager:
     def save(self):
         db = Connection()
         for tweet in self.buffer:
-            tweet_str = re.escape(self.tweet_to_json(tweet))
+            tweet_str = self.tweet_to_json(tweet).encode('string_escape')
             db.cursor.execute("INSERT INTO MinedData (raw_tweet, tweet_id) VALUES ('" + tweet_str + "', '" + tweet.id_str + "')")
         db.cursor.close()
         db.connection.close()

@@ -1,3 +1,4 @@
 tweepy
 nltk
 pymysql
+emoji
