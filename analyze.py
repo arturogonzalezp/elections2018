@@ -7,7 +7,7 @@ db = Connection()
 db.cursor.execute('SELECT * FROM MinedData')
 result = db.cursor.fetchall()
 for row in result:
-    tweet = ElectionsTweet(row[0],row[1],row[3])
+    tweet = ElectionsTweet(row[0],row[1],row[2])
     # Clean tweet
     tweet.clean_main_text()
     tweet.sentiment = ElectionsTweet.get_sentiment(tweet.clean_text)
