@@ -30,7 +30,7 @@ class Manager:
         db = Connection()
         for tweet in self.buffer:
             tweet_str = self.tweet_to_json(tweet).encode('string_escape')
-            db.cursor.execute("INSERT INTO MinedData (raw_tweet, tweet_id) VALUES ('" + tweet_str + "', '" + tweet.id_str + "')")
+            db.cursor.execute("INSERT INTO MinedData (raw_tweet) VALUES ('" + tweet_str + "')")
         db.cursor.close()
         db.connection.close()
     def tweet_to_json(self,tweet):
