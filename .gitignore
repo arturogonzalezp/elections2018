@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Custom
+.DS_Store
+.vscode/
+.env
+playground.py
+.vs/
+local_storage.json
