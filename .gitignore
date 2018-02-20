@@ -107,3 +107,4 @@ ENV/
 playground.py
 .vs/
 local_storage.json
+elections/utils/candidates.txt
