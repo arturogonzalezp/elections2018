@@ -2,6 +2,7 @@ include .env
 default:
 	@make clean
 	@make setup
+	@make tests
 	@make run
 setup:
 	@make clean
@@ -15,14 +16,17 @@ install:
 	@touch elections/storage/local_storage.json
 	@make setup
 run:
+	@make tests
 	@python app.py
 playground:
+	@make tests
 	@python playground.py
 analyze:
+	@make tests
 	@python analyze.py
 clean:
 	@find . -name \*.pyc -delete
 	@clear
-test:
-	@echo "Tests"
+tests:
+	@python test/test_calc.py
 .PHONY: default
