@@ -1,16 +1,16 @@
 # coding = utf-8
 import tweepy
 import os
-from ..api.config import TwitterAPI
 
 ROOT = lambda base : os.path.join(os.path.dirname(__file__), base).replace('\\','/')
 FILE_NAME = "candidates.txt"
 MAX_TWEETS = 200
 
 class CandidatesConsumer():
-    def __init__(self):
-        self.twitter_api = TwitterAPI()
+    def __init__(self, twitter_api):
+        self.twitter_api = twitter_api
         self.candidates = []
+        self.get_candidates()
 
     def get_candidates(self):
         try: 
