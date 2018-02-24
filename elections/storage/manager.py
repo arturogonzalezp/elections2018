@@ -6,20 +6,21 @@ class Manager:
     def __init__(self,buffer_size):
         self.buffer_size = buffer_size
         self.buffer = []
+        print ('Manager created with a buffer size of ' + str(self.buffer_size) + " tweets")
     def insert_tweet(self,tweet):
         self.buffer.append(tweet)
-        if(self.buffer.__len__() == self.buffer_size):
+        if(len(self.buffer) == self.buffer_size):
             if(Connection.mode == 'PROD'):
                 self.save()
             elif(Connection.mode == 'DEV'):
                 self.save_local()
-                print "saved"
+                print ('Saved in dev mode')
             self.buffer = []
     def save_local(self):
         try:
             file = open(FILE_NAME, 'w')
         except IOError:
-            print "Error opening file: " + FILE_NAME
+            print ("Error opening file: " + FILE_NAME)
         else:
             temp_buffer = []
             for tweet in self.buffer:
