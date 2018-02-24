@@ -13,6 +13,7 @@ install:
 	@touch playground.py
 	@touch .env
 	@touch elections/utils/users.txt
+	@touch elections/utils/candidates.txt
 	@touch elections/storage/local_storage.json
 	@make setup
 run:
