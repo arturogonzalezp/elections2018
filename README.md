@@ -23,6 +23,7 @@ export DB_USER=$db_user
 export DB_PASSWORD=$db_password
 export DB_SCHEMA=$db_schema
 export ENVIRONMENT=(DEV or PROD)
+export TWEET_BUFFER_SIZE=$buffer_size
 ```
 
 ### Make Commands
