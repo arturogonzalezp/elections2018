@@ -10,9 +10,8 @@ class CandidatesConsumer():
     def __init__(self, twitter_api):
         self.twitter_api = twitter_api
         self.candidates = []
-        self.get_candidates()
 
-    def get_candidates(self):
+    def fetch_candidates(self):
         try: 
             candidates_file = open(ROOT(FILE_NAME), "r")
         except IOError:
