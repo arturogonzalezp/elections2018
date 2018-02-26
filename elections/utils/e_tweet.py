@@ -22,6 +22,13 @@ class ElectionsTweet:
         self.clean_text = ElectionsTweet.remove_urls(self.clean_text)
         self.clean_text = ElectionsTweet.remove_usernames(self.clean_text)
         self.clean_text = ElectionsTweet.remove_emojis(self.clean_text)
+        self.clean_text = ElectionsTweet.remove_hashtags(self.clean_text)
+
+    @staticmethod
+    def remove_hashtags(text):
+        for hashtag in ElectionsTweet.get_hashtags(text):
+            text = text.replace('#' + hashtag,'')
+        return text
 
     @staticmethod
     def remove_emojis(text):
