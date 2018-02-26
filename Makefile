@@ -30,4 +30,5 @@ clean:
 	@clear
 tests:
 	@python test/test_calc.py
+	@echo '----------------------------------------------------------------------'
 .PHONY: default
