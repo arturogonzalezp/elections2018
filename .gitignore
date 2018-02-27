@@ -109,4 +109,5 @@ playground.py
 local_storage.json
 elections/utils/candidates.txt
 elections/utils/users.txt
+query_candidates.py
 elections/storage/local_storage.json
