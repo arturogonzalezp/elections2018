@@ -17,16 +17,10 @@ class Manager:
                 print ('Saved in dev mode')
             self.buffer = []
     def save_local(self):
-        try:
-            file = open(FILE_NAME, 'w')
-        except IOError:
-            print ("Error opening file: " + FILE_NAME)
-        else:
-            temp_buffer = []
-            for tweet in self.buffer:
-                temp_buffer.append(tweet._json)
-            file.write(self.tweets_to_json(temp_buffer))
-            file.close()
+        temp_buffer = []
+        for tweet in self.buffer:
+            temp_buffer.append(tweet._json)
+        Connection.write_to_file(FILE_NAME, self.tweets_to_json(temp_buffer))
     def save(self):
         db = Connection()
         for tweet in self.buffer:
