@@ -25,6 +25,9 @@ playground:
 analyze:
 	@make tests
 	@python analyze.py
+word-cloud:
+	@make tests
+	@python word_cloud.py
 clean:
 	@find . -name \*.pyc -delete
 	@clear
