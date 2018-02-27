@@ -106,7 +106,5 @@ ENV/
 .env
 playground.py
 .vs/
-local_storage.json
-elections/utils/candidates.txt
-elections/utils/users.txt
-elections/storage/local_storage.json
+elections/files/local_storage.json
+elections/files/users.txt

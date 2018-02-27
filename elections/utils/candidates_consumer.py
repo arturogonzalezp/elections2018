@@ -1,26 +1,15 @@
 # coding=utf-8
 import tweepy
 import os
+from elections.storage.connection import Connection
 
-ROOT = lambda base : os.path.join(os.path.dirname(__file__), base).replace('\\','/')
 FILE_NAME = "candidates.txt"
 MAX_TWEETS = 200
 
 class CandidatesConsumer():
     def __init__(self, twitter_api):
         self.twitter_api = twitter_api
-        self.candidates = []
-
-    def fetch_candidates(self):
-        try: 
-            candidates_file = open(ROOT(FILE_NAME), "r")
-        except IOError:
-            print("Cannot open " + FILE_NAME)
-        else:
-            for i, line in enumerate(candidates_file):
-                self.candidates.insert(i, "@"+line)
-            
-            candidates_file.close()
+        self.candidates = Connection.read_from_file(FILE_NAME)
 
     def get_all_tweets(self, candidate):
         all_tweets = []
