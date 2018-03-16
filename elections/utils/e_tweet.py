@@ -3,6 +3,7 @@ import json
 import nltk
 import re
 import emoji
+from string import punctuation
 
 class ElectionsTweet:
     def __init__(self, db_id, raw_tweet, created_at):
@@ -44,6 +45,10 @@ class ElectionsTweet:
     def remove_usernames(text):
         text = re.sub(r'(\A|\s)@(\w+)','',text)
         return text.strip()
+    
+    @staticmethod
+    def remove_punctuations(text):
+        return ''.join(c for c in text if c not in punctuation)
 
     @staticmethod
     def get_emojis(text):
