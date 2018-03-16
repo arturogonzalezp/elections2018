@@ -11,6 +11,7 @@ from collections import Counter
 twitter_api = TwitterAPI()
 
 stop_words = set(stopwords.words('spanish'))
+
 counter = 0
 
 consumer = CandidatesConsumer(twitter_api)
@@ -36,6 +37,7 @@ for candidate in consumer.candidates:
     delete_stopwords(candidate_tweets)
 
 unaccented_tweets = [unicodedata.normalize('NFKD', x).encode('ASCII', 'ignore') for x in filtired_tweets]
-#print(unaccented_tweets)
 wcloud = Counter(unaccented_tweets)
-print(wcloud)
+
+for w,i  in wcloud.items():
+    print(w, i)
