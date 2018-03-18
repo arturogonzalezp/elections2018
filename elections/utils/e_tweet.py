@@ -3,6 +3,7 @@ import json
 import nltk
 import re
 import emoji
+from elections.storage.connection import Connection
 
 class ElectionsTweet:
     def __init__(self, db_id, raw_tweet, created_at):
@@ -57,4 +58,15 @@ class ElectionsTweet:
 
     @staticmethod
     def get_sentiment(text):
-        return 1.0
+        return ElectionsTweet.get_emoji_sentiment(ElectionsTweet.get_emojis(text))
+
+    @staticmethod
+    def get_emoji_sentiment(emoji_list):
+        emojis = json.load(open('elections/files/emoji-sentiment-list.json'))
+        for e in emojis:
+            emojiCode = e["sequence"]
+            if (len(emojiCode) == 4):
+                emoji = '\U0000'+emojiCode
+            else:
+                emoji = '\U000'+emojiCode
+        return 0.5

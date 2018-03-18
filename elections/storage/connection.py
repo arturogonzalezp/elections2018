@@ -28,7 +28,7 @@ class Connection:
         return array
 
     @staticmethod
-    def write_to_file(file_name, text)
+    def write_to_file(file_name, text):
         root = lambda base : os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "files/", file_name))
         try: 
             file_a = open(root(file_name), "w")

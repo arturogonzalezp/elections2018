@@ -16,6 +16,7 @@ for row in result:
     print ('Original Tweet:\n@' + tweet.info['user']['screen_name'] + ': ' + tweet.get_text() + '\n')
     print ('Clean Tweet: \n@' + tweet.info['user']['screen_name'] + ': ' + tweet.clean_text + '\n')
     print ('Emojis: [ ' + ' , '.join(tweet.emojis) + ' ]')
+    print ('Database ID: ' + str(tweet.db_id))
     print ('Hashtags: [ ' + ' , '.join(tweet.hashtags) + ' ]')
     print ('Sentiment: ' + str(tweet.sentiment))
     print ('*********************************************\n')
