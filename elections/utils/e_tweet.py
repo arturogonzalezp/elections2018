@@ -76,4 +76,6 @@ class ElectionsTweet:
             if(emojiDecoded in emoji_list):
                 emojiSentiment = emojiSentiment + e['sentiment']
             
+            emojiSentiment = emojiSentiment / len(emoji_list)
+            
         return emojiSentiment            

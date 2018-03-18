@@ -12,7 +12,7 @@ for row in result:
     tweet.clean_main_text()
     tweet.emojis = ElectionsTweet.get_emojis(tweet.get_text())
     tweet.hashtags = ElectionsTweet.get_hashtags(tweet.get_text())
-    tweet.sentiment = ElectionsTweet.get_sentiment(tweet.clean_text)
+    tweet.emojiSentiment = ElectionsTweet.get_emoji_sentiment(tweet.emojis)
     print ('Original Tweet:\n@' + tweet.info['user']['screen_name'] + ': ' + tweet.get_text() + '\n')
     print ('Clean Tweet: \n@' + tweet.info['user']['screen_name'] + ': ' + tweet.clean_text + '\n')
     print ('Emojis: [ ' + ' , '.join(tweet.emojis) + ' ]')
