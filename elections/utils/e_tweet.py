@@ -58,15 +58,22 @@ class ElectionsTweet:
 
     @staticmethod
     def get_sentiment(text):
-        return ElectionsTweet.get_emoji_sentiment(ElectionsTweet.get_emojis(text))
+        return 0.5
 
     @staticmethod
     def get_emoji_sentiment(emoji_list):
         emojis = json.load(open('elections/files/emoji-sentiment-list.json'))
+        emojiSentiment = 0
         for e in emojis:
-            emojiCode = e["sequence"]
+            emojiCode = e['sequence']
+
             if (len(emojiCode) == 4):
-                emoji = '\U0000'+emojiCode
+                emojiCode = '\U0000'+emojiCode
             else:
-                emoji = '\U000'+emojiCode
-        return 0.5
+                emojiCode = '\U000'+emojiCode
+
+            emojiDecoded = emojiCode.decode('unicode-escape')
+            if(emojiDecoded in emoji_list):
+                emojiSentiment = emojiSentiment + e['sentiment']
+            
+        return emojiSentiment            
