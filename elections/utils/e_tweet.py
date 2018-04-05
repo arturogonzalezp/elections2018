@@ -3,6 +3,7 @@ import json
 import nltk
 import re
 import emoji
+from elections.storage.connection import Connection
 from string import punctuation
 
 class ElectionsTweet:
@@ -62,4 +63,24 @@ class ElectionsTweet:
 
     @staticmethod
     def get_sentiment(text):
-        return 1.0
+        return 0.5
+
+    @staticmethod
+    def get_emoji_sentiment(emoji_list):
+        emojis = json.load(open('elections/files/emoji-sentiment-list.json'))
+        emojiSentiment = 0
+        for e in emojis:
+            emojiCode = e['sequence']
+
+            if (len(emojiCode) == 4):
+                emojiCode = '\U0000'+emojiCode
+            else:
+                emojiCode = '\U000'+emojiCode
+
+            emojiDecoded = emojiCode.decode('unicode-escape')
+            if(emojiDecoded in emoji_list):
+                emojiSentiment = emojiSentiment + e['sentiment']
+            
+            emojiSentiment = emojiSentiment / len(emoji_list)
+            
+        return emojiSentiment            
