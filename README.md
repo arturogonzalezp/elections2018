@@ -35,6 +35,7 @@ make playground
 make tests
 make clean
 make analyze
+make word-cloud
 ```
 
 ### Config files
