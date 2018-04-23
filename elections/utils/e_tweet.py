@@ -5,6 +5,9 @@ import re
 import emoji
 from elections.storage.connection import Connection
 from string import punctuation
+from elections.utils.sentiment_analyzer import SentimentAnalyzer
+
+sentiment_analyzer = SentimentAnalyzer()
 
 class ElectionsTweet:
     def __init__(self, db_id, raw_tweet, created_at):
@@ -63,7 +66,7 @@ class ElectionsTweet:
 
     @staticmethod
     def get_sentiment(text):
-        return 0.5
+        return sentiment_analyzer.analyze_sentiment(text)
 
     @staticmethod
     def get_emoji_sentiment(emoji_list):
@@ -81,6 +84,6 @@ class ElectionsTweet:
             if(emojiDecoded in emoji_list):
                 emojiSentiment = emojiSentiment + e['sentiment']
             
-            emojiSentiment = emojiSentiment / len(emoji_list)
+            emojiSentiment = emojiSentiment / max(len(emoji_list), 1)
             
         return emojiSentiment            
