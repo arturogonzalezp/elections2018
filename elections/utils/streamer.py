@@ -4,10 +4,12 @@ from elections.storage.manager import Manager
 TWEET_BUFFER_SIZE = int(os.environ.get('TWEET_BUFFER_SIZE'))
 
 class TweetsStreamer(tweepy.StreamListener):
+    def set_candidate(self, candidate_username):
+        self.candidate_username = candidate_username
     def on_connect(self):
         # Called once connected to streaming server
         print ('Connected to streamer')
-        self.manager = Manager(TWEET_BUFFER_SIZE)
+        self.manager = Manager(TWEET_BUFFER_SIZE,self.candidate_username)
         self.tweet_counter = 0
     def keep_alive(self):
         # Called when a keep-alive arrived

@@ -18,7 +18,7 @@ install:
 	@make setup
 run:
 	@make tests
-	@python app.py
+	@python app.py ${candidate}
 playground:
 	@make tests
 	@python playground.py

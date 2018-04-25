@@ -2,11 +2,15 @@
 from elections.utils.candidates_consumer import CandidatesConsumer
 from elections.utils.e_tweet import ElectionsTweet
 from elections.api.config import TwitterAPI
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
 import unicodedata
 from collections import Counter
+
+nltk.download('stopwords')
+nltk.download('punkt')
 
 twitter_api = TwitterAPI()
 
