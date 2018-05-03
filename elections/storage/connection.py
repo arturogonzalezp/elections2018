@@ -22,7 +22,7 @@ class Connection:
             print("Cannot open " + file_name)
         else:
             for i, line in enumerate(file_a):
-                array.insert(i, "@"+line)
+                array.insert(i, "@"+line.rstrip('\r\n'))
             
             file_a.close()
         return array

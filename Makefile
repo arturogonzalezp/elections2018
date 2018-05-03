@@ -7,6 +7,8 @@ default:
 setup:
 	@make clean
 	@sed 's/=s.*//' .env | while read x ; do eval $$x ; done
+	@python setup.py
+	@make clean
 install:
 	@sudo easy_install pip
 	@sudo pip install --ignore-installed -r requirements.txt
@@ -18,7 +20,7 @@ install:
 	@make setup
 run:
 	@make tests
-	@python app.py
+	@python app.py ${candidate}
 playground:
 	@make tests
 	@python playground.py

@@ -8,14 +8,17 @@ from string import punctuation
 from elections.utils.sentiment_analyzer import SentimentAnalyzer
 
 sentiment_analyzer = SentimentAnalyzer()
+upperbound = 0.7
+lowerbound = 0.3
 
 class ElectionsTweet:
-    def __init__(self, db_id, raw_tweet, created_at):
+    def __init__(self, db_id, raw_tweet, created_at, candidate_username):
         self.db_id = db_id
         self.info = json.loads(raw_tweet)
         self.created_at = created_at
         self.sentiment = 0.5
         self.clean_text = self.get_text()
+        self.candidate_username = candidate_username
     
     def get_text(self):
         if self.info['truncated']:
@@ -86,4 +89,12 @@ class ElectionsTweet:
             
             emojiSentiment = emojiSentiment / max(len(emoji_list), 1)
             
-        return emojiSentiment            
+        return emojiSentiment
+    @staticmethod
+    def get_tweet_status(sentiment):
+        if(sentiment >= upperbound):
+            return 'Positive'
+        elif(sentiment <= lowerbound):
+            return 'Negative'
+        else:
+            return 'Neutral'  

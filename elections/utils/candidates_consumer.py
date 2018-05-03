@@ -3,7 +3,7 @@ import tweepy
 import os
 from elections.storage.connection import Connection
 
-FILE_NAME = "candidates.txt"
+FILE_NAME = "candidates.txt" if Connection.mode == 'PROD' else "wordcloud-test.txt"
 MAX_TWEETS = 200
 
 class CandidatesConsumer():
@@ -13,13 +13,12 @@ class CandidatesConsumer():
 
     def get_all_tweets(self, candidate):
         all_tweets = []
-
         new_tweets = self.twitter_api.api.user_timeline(screen_name = candidate,count = MAX_TWEETS)
         all_tweets.extend(new_tweets)
         oldest_tweet = all_tweets[-1].id - 1
         
         while len(new_tweets) > 0:
-        
+            print ('Downloaded '+ str(len(all_tweets)) + ' tweets from ' + candidate)
             new_tweets = self.twitter_api.api.user_timeline(screen_name = candidate,count=MAX_TWEETS, max_id=oldest_tweet)
 
             all_tweets.extend(new_tweets)
