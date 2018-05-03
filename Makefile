@@ -7,6 +7,8 @@ default:
 setup:
 	@make clean
 	@sed 's/=s.*//' .env | while read x ; do eval $$x ; done
+	@python setup.py
+	@make clean
 install:
 	@sudo easy_install pip
 	@sudo pip install --ignore-installed -r requirements.txt

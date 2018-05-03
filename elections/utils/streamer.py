@@ -18,6 +18,7 @@ class TweetsStreamer(tweepy.StreamListener):
         # Called when a new status arrives
         if not status.retweeted and 'RT @' not in status.text and status.lang == 'es':
             self.tweet_counter += 1
+            #print ('Tweet (' + str(self.tweet_counter) + ') by: @' + status.user.screen_name + ': ' + status.text)
             print ('Tweet (' + str(self.tweet_counter) + ') by: @' + status.user.screen_name)
             self.manager.insert_tweet(status)
     def on_exception(self, exception):

@@ -31,6 +31,54 @@ class Manager:
         db.connection.close()
     def tweet_to_json(self,tweet):
         return json.dumps(tweet._json)
-    
     def tweets_to_json(self,tweets):
         return json.dumps(tweets)
+    @staticmethod
+    def insert_wordcloud(word_clouds):
+        if(Connection.mode == 'PROD'):
+            db = Connection()
+            for candidate_username,word_cloud in word_clouds.items():
+                db.cursor.execute("UPDATE Politician SET politician_json = '" + json.dumps(word_cloud) + "' WHERE Politician.username = '" + candidate_username[1:] + "'")
+            print('Saved in db')
+            db.cursor.close()
+            db.connection.close()
+        elif(Connection.mode == 'DEV'):
+            for user,word_cloud in word_clouds.items():
+                print(user + ': ')
+                for word,count in word_cloud.items():
+                    print(word,count)
+    @staticmethod
+    def get_all_mined_tweets():
+        db = Connection()
+        db.cursor.execute('SELECT * FROM MinedData')
+        db_tweets = db.cursor.fetchall()
+        db.cursor.close()
+        db.connection.close()
+        return db_tweets
+    @staticmethod
+    def insert_analyzed_tweet(tweet):
+        db = Connection()
+        raw_tweet = json.dumps(tweet.info)
+        candidate_id = 0
+        if(tweet.candidate_username == 'lopezobrador_'):
+            candidate_id = 3
+        elif(tweet.candidate_username == 'RicardoAnayaC'):
+            candidate_id = 1
+        elif(tweet.candidate_username == 'JoseAMeadeK'):
+            candidate_id = 2
+        elif(tweet.candidate_username == 'Mzavalagc'):
+            candidate_id = 4
+        elif(tweet.candidate_username == 'JaimeRdzNL'):
+            candidate_id = 5
+
+        db.cursor.execute("INSERT INTO `Tweet` (`sentiment`, `sentiment_percentage`,`raw_tweet`,`politician_id`) VALUES (%s, %s,%s,%s)", (tweet.overall_status,str(tweet.sentiment), json.dumps(tweet.info),str(candidate_id)))
+        db.cursor.execute("DELETE FROM `MinedData` WHERE id=%s", (str(tweet.db_id)))
+
+        if(tweet.overall_status == 'Positive'):
+            db.cursor.execute('UPDATE Politician SET politician_pts=politician_pts+1 WHERE id=' + str(candidate_id))
+        if(tweet.overall_status == 'Negative'):
+            db.cursor.execute('UPDATE Politician SET politician_nts=politician_nts+1 WHERE id=' + str(candidate_id))
+        if(tweet.overall_status == 'Neutral'):
+            db.cursor.execute('UPDATE Politician SET politician_na=politician_na+1 WHERE id=' + str(candidate_id))
+        db.cursor.close()
+        db.connection.close()
