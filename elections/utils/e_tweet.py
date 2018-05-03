@@ -9,7 +9,7 @@ from elections.utils.sentiment_analyzer import SentimentAnalyzer
 
 sentiment_analyzer = SentimentAnalyzer()
 upperbound = 0.7
-lowerbound = 0.3
+lowerbound = 0.4
 
 class ElectionsTweet:
     def __init__(self, db_id, raw_tweet, created_at, candidate_username):
